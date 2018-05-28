@@ -1,4 +1,4 @@
-package com.tqs.android.sample;
+package com.nanyuweiyi.activity;
 
 import android.os.Bundle;
 import android.support.annotation.ColorRes;

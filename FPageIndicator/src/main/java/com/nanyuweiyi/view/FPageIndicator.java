@@ -1,19 +1,15 @@
 package com.nanyuweiyi.view;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.os.Build;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
-
-import com.tqs.android.view.R;
 
 public class FPageIndicator extends View {
 
@@ -41,6 +37,8 @@ public class FPageIndicator extends View {
     private Paint innerFocusPaint = new Paint();
     private Paint outPaint = new Paint();
 
+    private Callback callback;
+
     private ViewPager.OnPageChangeListener pageChangeListener = new ViewPager.OnPageChangeListener() {
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -52,6 +50,7 @@ public class FPageIndicator extends View {
         @Override
         public void onPageSelected(int position) {
             setSelectedPos(position);
+            callback.isLastListener(isLastPos());
         }
 
         @Override
@@ -70,13 +69,6 @@ public class FPageIndicator extends View {
 
     public FPageIndicator(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        initAttributes(attrs);
-        initPaint();
-    }
-
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public FPageIndicator(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
         initAttributes(attrs);
         initPaint();
     }
@@ -203,6 +195,13 @@ public class FPageIndicator extends View {
     }
 
     /**
+     * 是否是最后一张.
+     */
+    public boolean isLastPos() {
+        return this.selectedPos + 1 == count;
+    }
+
+    /**
      * Page Indicator 总共的数目
      *
      * @param count 总数目.
@@ -219,7 +218,8 @@ public class FPageIndicator extends View {
      *
      * @param viewPager viewpager.
      */
-    public void attachToViewPager(ViewPager viewPager) {
+    public void attachToViewPager(ViewPager viewPager, Callback callback) {
+        this.callback = callback;
         if (viewPager == null) {
             return;
         }
@@ -227,6 +227,10 @@ public class FPageIndicator extends View {
         if (viewPager.getAdapter() != null) {
             setCount(viewPager.getAdapter().getCount());
         }
+    }
+
+    public interface Callback{
+        void isLastListener(boolean isLastPos);
     }
 
 }

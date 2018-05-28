@@ -1,4 +1,4 @@
-package com.tqs.android.sample;
+package com.nanyuweiyi.activity;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -7,17 +7,15 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.util.Pair;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.nanyuweiyi.view.FPageIndicator;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements FPageIndicator.Callback{
 
     TextView tvOpen;
     private List<Pair<Integer, Integer>> dataMap;
@@ -31,31 +29,18 @@ public class MainActivity extends AppCompatActivity {
 
         ViewPager pager = (ViewPager) findViewById(R.id.viewpager);
         pager.setAdapter(new PicFragmentAdapter(getSupportFragmentManager()));
-        pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                Toast.makeText(MainActivity.this, "第" + position + "张", Toast.LENGTH_SHORT).show();
-                if (position == dataMap.size() - 1) {
-                    tvOpen.setVisibility(View.VISIBLE);
-                } else {
-                    tvOpen.setVisibility(View.GONE);
-                }
-                Log.e("---", position+"");
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
 
         FPageIndicator indicator = (FPageIndicator) findViewById(R.id.indicator);
-        indicator.attachToViewPager(pager);
+        indicator.attachToViewPager(pager, this);
+    }
+
+    @Override
+    public void isLastListener(boolean isLastPos) {
+        if(isLastPos){
+            tvOpen.setVisibility(View.VISIBLE);
+        }else {
+            tvOpen.setVisibility(View.GONE);
+        }
     }
 
     private class PicFragmentAdapter extends FragmentStatePagerAdapter {
