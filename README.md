@@ -10,7 +10,7 @@
 
 在build.grade中引用：
 
-implementation 'com.github.nanyuweiyi:guidePageIndicator:1.0.0'
+implementation 'com.github.nanyuweiyi:guidePageIndicator:1.0.1'
 
 |方法名   	|使用说明   	|
 |:-:	|---	|
