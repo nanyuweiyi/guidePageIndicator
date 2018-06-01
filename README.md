@@ -5,7 +5,6 @@
 
 ---------------
 # 使用说明
-1527835928823818.gif
 1、在build.grade中引用：
 ```
 implementation 'com.github.nanyuweiyi:guidePageIndicator:1.0.1'
