@@ -9,6 +9,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.nanyuweiyi.view.FPageIndicator;
 
@@ -26,6 +27,12 @@ public class MainActivity extends AppCompatActivity implements FPageIndicator.Ca
         setContentView(R.layout.activity_main);
 
         tvOpen = (TextView) findViewById(R.id.tvOpen);
+        tvOpen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "按钮被点击了", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         ViewPager pager = (ViewPager) findViewById(R.id.viewpager);
         pager.setAdapter(new PicFragmentAdapter(getSupportFragmentManager()));
@@ -48,11 +55,11 @@ public class MainActivity extends AppCompatActivity implements FPageIndicator.Ca
         PicFragmentAdapter(FragmentManager fm) {
             super(fm);
             dataMap = new ArrayList<>();
-            dataMap.add(new Pair<>(R.color.bg_1, R.drawable.img_1));
-            dataMap.add(new Pair<>(R.color.bg_2, R.drawable.img_2));
-            dataMap.add(new Pair<>(R.color.bg_3, R.drawable.img_3));
-            dataMap.add(new Pair<>(R.color.bg_4, R.drawable.img_4));
-            dataMap.add(new Pair<>(R.color.bg_5, R.drawable.img_5));
+            dataMap.add(new Pair<>(R.color.bg_1, R.mipmap.img_1));
+            dataMap.add(new Pair<>(R.color.bg_2, R.mipmap.img_2));
+            dataMap.add(new Pair<>(R.color.bg_3, R.mipmap.img_3));
+            dataMap.add(new Pair<>(R.color.bg_4, R.mipmap.img_4));
+            dataMap.add(new Pair<>(R.color.bg_5, R.mipmap.img_5));
         }
 
         @Override

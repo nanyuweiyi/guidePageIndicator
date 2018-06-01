@@ -1,16 +1,26 @@
 # FPageIndicator
 用来显示当前所在页的页面指示器，具体样式见Readme中的Gif文件。
 
-![样式展示](https://cloud.githubusercontent.com/assets/1680722/20701135/42297c0a-b64c-11e6-8eea-ab706946af90.gif)
+![image](./help.gif)
 
 ---------------
 # 使用说明
-
-提供的接口
-
-在build.grade中引用：
-
+1527835928823818.gif
+1、在build.grade中引用：
+```
 implementation 'com.github.nanyuweiyi:guidePageIndicator:1.0.1'
+```
+2、在Activity中调用：
+```
+ViewPager pager = (ViewPager) findViewById(R.id.viewpager);
+pager.setAdapter(new PicFragmentAdapter(getSupportFragmentManager()));
+
+FPageIndicator indicator = (FPageIndicator) findViewById(R.id.indicator);
+indicator.attachToViewPager(pager, this);
+
+注意实现implements FPageIndicator.Callback
+```
+## 说明
 
 |方法名   	|使用说明   	|
 |:-:	|---	|
@@ -29,3 +39,5 @@ implementation 'com.github.nanyuweiyi:guidePageIndicator:1.0.1'
 |pi_focus_color   	|选中时的颜色 	|
 |pi_padding   	|两点之间的间距 	|
 
+
+欢迎大家随时指出问题，谢谢。
